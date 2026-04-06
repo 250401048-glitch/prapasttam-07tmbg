@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <title>Dashboard Absensi</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      margin: 0;
+      background: #d8c06e;
+    }
+
+    .container {
+      display: flex;
+    }
+
+    .sidebar {
+      width: 220px;
+      background: #573104;
+      color: white;
+      height: 100vh;
+      padding: 40px;
+    }
+
+    .logo-box img {
+      width: 150px;
+      border-radius: 200px;
+      margin-top: 8px;
+    }
+
+    .main {
+      flex: 1;
+      padding: 30px;
+    }
+
+    .form-box {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    input,
+    select {
+      padding: 10px;
+    }
+
+    button {
+      padding: 10px 15px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      color: white;
+    }
+
+    .hadir-btn {
+      background: green;
+    }
+
+    .tidak-btn {
+      background: red;
+    }
+
+    .card-box {
+      display: flex;
+      gap: 50px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .card {
+      background: orange;
+      padding: 70px;
+      border-radius: 10px;
+      width: 150px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    table {
+      width: 100%;
+      background: orange;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+      text-align: center;
+    }
+
+    .hadir-text {
+      color: green;
+    }
+
+    .tidak-text {
+      color: red;
+    }
+
+    h1,
+    h2 {
+      font-family: 'Times New Roman', Times, serif;
+    }
+
+    h1 {
+      color: #ae6308;
+    }
+
+    h2 {
+      text-align: center;
+      color: #ae6308;
+    }
+
+    /* SOSIAL */
+    .sosial {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .sosial a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: #e5b72e;
+      font-size: 18px;
+      font-weight: bold;
+      padding: 10px 15px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      transition: 0.3s;
+    }
+
+    .sosial a:hover {
+      background: #e5b72e;
+      color: black;
+      transform: translateX(5px);
+    }
+
+    .sosial i {
+      font-size: 22px;
+    }
+
+    header {
+      font-family: 'Times New Roman', Times, serif;
+      color: #faf9f8;
+      margin-top: 140%;
+      font-size: medium;
+      text-align: center;
+    }
+
+    /* EFEK KILAP */
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -75%;
+      width: 70%;
+      height: 150%;
+      background: linear-gradient(120deg,
+          transparent,
+          rgba(240, 235, 237, 0.6),
+          transparent);
+      transform: skewX(-25deg);
+      animation: shine 4s infinite linear;
+    }
+
+    @keyframes shine {
+      0% {
+        left: -555%;
+      }
+
+      100% {
+        left: 725%;
+      }
+    }
+
+    /* ================= RESPONSIVE ================= */
+    @media (max-width: 768px) {
+
+      .container {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        height: auto;
+        padding: 15px;
+        text-align: center;
+      }
+
+      .logo-box img {
+        width: 90px;
+      }
+
+      header {
+        margin-top: 10% !important;
+        font-size: 12px;
+      }
+
+      .main {
+        padding: 15px;
+      }
+
+      h1 {
+        font-size: 20px;
+        text-align: center;
+      }
+
+      .form-box {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      input,
+      select,
+      button {
+        width: 100%;
+        font-size: 14px;
+      }
+
+      .card-box {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .card {
+        width: 100%;
+        padding: 20px;
+      }
+
+      .table-box {
+        overflow-x: auto;
+      }
+
+      table {
+        min-width: 500px;
+        font-size: 12px;
+      }
+
+      th,
+      td {
+        padding: 8px;
+      }
+
+      .sosial a {
+        font-size: 14px;
+        padding: 8px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <script>
+    if (localStorage.getItem('login') !== 'true') {
+      window.location.href = '../halaman login/index.html';
+    }
+  </script>
+
+  <div class="container">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="logo-box">
+        <img src="WhatsApp Image 2026-04-05 at 11.45.42.jpeg">
+        <h2>PRAPASTAM</h2>
+
+        <div class="sosial">
+          <a href="https://www.instagram.com/" target="_blank">
+            <i class="fab fa-instagram"></i> Instagram
+          </a>
+          <a href="https://www.tiktok.com/" target="_blank">
+            <i class="fab fa-tiktok"></i> TikTok
+          </a>
+        </div>
+
+        <header>@prapastam.smp07.ac.id</header>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+      <h1>DASHBOARD ABSENSI</h1>
+
+      <div class="form-box">
+        <input type="text" id="namaInput" placeholder="Masukkan Nama">
+
+        <select id="kelasInput">
+          <option>7</option>
+          <option>8</option>
+          <option>9</option>
+        </select>
+
+        <select id="pertemuanInput">
+          <option value="1">Pertemuan 1</option>
+          <option value="2">Pertemuan 2</option>
+          <option value="3">Pertemuan 3</option>
+          <option value="4">Pertemuan 4</option>
+          <option value="5">Pertemuan 5</option>
+          <option value="6">Pertemuan 6</option>
+          <option value="7">Pertemuan 7</option>
+          <option value="8">Pertemuan 8</option>
+          <option value="9">Pertemuan 9</option>
+          <option value="10">Pertemuan 10</option>
+        </select>
+
+        <button onclick="absen('Hadir')" class="hadir-btn">HADIR</button>
+        <button onclick="absen('Tidak Hadir')" class="tidak-btn">TIDAK HADIR</button>
+      </div>
+
+      <div class="card-box">
+        <div class="card">
+          <h3>TOTAL</h3>
+          <p id="total">0</p>
+        </div>
+        <div class="card">
+          <h3>HADIR</h3>
+          <p id="hadir">0</p>
+        </div>
+        <div class="card">
+          <h3>TIDAK HADIR</h3>
+          <p id="tidak">0</p>
+        </div>
+      </div>
+
+      <div class="table-box">
+        <h2>DATA ABSENSI</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>PERTEMUAN</th>
+              <th>NAMA</th>
+              <th>KELAS</th>
+              <th>STATUS</th>
+              <th>WAKTU</th>
+            </tr>
+          </thead>
+          <tbody id="tabel"></tbody>
+        </table>
+      </div>
+
+    </main>
+  </div>
+
+  <script>
+    let data = JSON.parse(localStorage.getItem('absensi')) || [];
+
+    function tampilkan() {
+      const tabel = document.getElementById('tabel');
+      tabel.innerHTML = '';
+
+      data.sort((a, b) => a.pertemuan - b.pertemuan);
+
+      data.forEach(item => {
+        tabel.innerHTML += `
+    <tr>
+      <td>Minggu ${item.pertemuan}</td>
+      <td>${item.nama}</td>
+      <td>${item.kelas}</td>
+      <td class="${item.status === 'Hadir' ? 'hadir-text' : 'tidak-text'}">${item.status}</td>
+      <td>${item.waktu}</td>
+    </tr>`;
+      });
+
+      updateStat();
+    }
+
+    function absen(status) {
+      const nama = document.getElementById('namaInput').value;
+      const kelas = document.getElementById('kelasInput').value;
+      const pertemuan = document.getElementById('pertemuanInput').value;
+
+      if (nama === '') return alert('Isi nama dulu!');
+
+      const sudah = data.find(i => i.nama === nama && i.pertemuan === pertemuan);
+      if (sudah) return alert('Sudah absen di pertemuan ini!');
+
+      const waktu = new Date().toLocaleString();
+      const absenData = { nama, kelas, status, waktu, pertemuan };
+
+      data.push(absenData);
+      localStorage.setItem('absensi', JSON.stringify(data));
+
+      fetch("https://script.google.com/macros/s/AKfycbzK4TlVyfpEyVfs-x54Y0bhE3CmsspNSQUgBIgvQei9cAC4v897TJbXyB3R6AjZZei9aA/exec", {
+        method: "POST",
+        body: JSON.stringify(absenData)
+      });
+
+      tampilkan();
+      document.getElementById('namaInput').value = '';
+    }
+
+    function updateStat() {
+      document.getElementById('total').innerText = data.length;
+      document.getElementById('hadir').innerText = data.filter(i => i.status === 'Hadir').length;
+      document.getElementById('tidak').innerText = data.filter(i => i.status === 'Tidak Hadir').length;
+    }
+
+    tampilkan();
+  </script>
+
+</body>
+
+</html>
